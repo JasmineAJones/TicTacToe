@@ -13,6 +13,22 @@ def wait():
 
 class Ui_MainWindow(object):
 
+    def bestSpot(self,count):
+        match count:
+            case 1:
+                z = int(uniform(1,10))
+                #While button is disabled, cycle through buttons until you find a button that is enabled#
+                while self.btn[z].isEnabled() == False:
+                    z = int(uniform(1,10))
+                #Then Proceed with...
+                self.btn[z].setText("O")
+                self.btn[z].setEnabled(False)
+            case _:
+                for a in self.pair:
+                    for b in a:
+                        print(b)
+
+
     def check(self,xo):
         #Column#
         if self.pushButton_3.text() == xo and self.pushButton_2.text() == xo and self.pushButton.text() == xo:
@@ -39,7 +55,7 @@ class Ui_MainWindow(object):
 
     def opponent(self, count):
         xo = "X"
-        
+        print(self.count)
         if count == 9 and self.check("X") == False and self.check("O") == False:
             self.label.setText("Tie!")
         elif self.check(xo) == True:
@@ -205,6 +221,17 @@ class Ui_MainWindow(object):
             1: self.pushButton, 2:self.pushButton_2, 3:self.pushButton_3, 
             4: self.pushButton_4, 5:self.pushButton_5, 6:self.pushButton_6, 
             7: self.pushButton_7, 8:self.pushButton_8, 9:self.pushButton_9}
+
+        self.pair = {
+            (1,6,7),(1,7,6),(1,2,3),(1,3,2),(1,4,9),(1,9,4),
+            (2,4,5),(2,5,4),(2,3,1),
+            (3,8,9),(3,9,8),(3,4,7),(3,7,4),
+            (6,4,8),(6,8,4),(6,7,1),
+            (7,5,9),(7,9,5),(7,4,3),
+            (5,4,2),
+            (9,8,3),(9,5,7),(9,4,1),
+            (8,4,6)
+        }
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
