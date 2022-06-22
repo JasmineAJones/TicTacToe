@@ -1,21 +1,12 @@
 #
 # Created By Jasmine Jones
 # 
-from cmath import sqrt
-from datetime import datetime
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtCore import QTimer
 import time
 from PyQt5.QtWidgets import QApplication, QMainWindow
-from reportlab.pdfgen.canvas import Canvas
-from reportlab.lib.units import inch
-import openpyxl
-import os
 from random import uniform
-from reportlab.lib.pagesizes import letter
-import textwrap
-from reportlab.lib import colors
-from datetime import datetime
 
 class Ui_MainWindow(object):
 
