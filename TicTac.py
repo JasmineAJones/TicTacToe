@@ -11,7 +11,7 @@ from reportlab.pdfgen.canvas import Canvas
 from reportlab.lib.units import inch
 import openpyxl
 import os
-import random
+from random import uniform
 from reportlab.lib.pagesizes import letter
 import textwrap
 from reportlab.lib import colors
