@@ -8,6 +8,9 @@ import time
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from random import uniform
 
+def wait():
+    time.sleep(1)
+
 class Ui_MainWindow(object):
 
     def check(self,xo):
@@ -30,156 +33,60 @@ class Ui_MainWindow(object):
             return True
         elif self.pushButton_7.text() == xo and self.pushButton_4.text() == xo and self.pushButton_3.text() == xo:
             return True
+        else:
+            return False
 
 
     def opponent(self, count):
-        xo = "O"
-        if count == 9:
+        xo = "X"
+        
+        if count == 9 and self.check("X") == False and self.check("O") == False:
             self.label.setText("Tie!")
         elif self.check(xo) == True:
-            self.label.setText("")
+            self.label.setText("X's Won!")
+            for i in self.btn:
+                self.btn[i].setEnabled(False)
+
         elif self.check(xo) == False:
-            #find random enabled button to push#
             z = int(uniform(1,10))
+            #While button is disabled, cycle through buttons until you find a button that is enabled#
+            while self.btn[z].isEnabled() == False:
+                z = int(uniform(1,10))
+                #Then Proceed with...
+            self.btn[z].setText("O")
+            self.btn[z].setEnabled(False)
+            self.count = self.count +1
+            #self.label.setText("X's Turn...")
+            if self.check("O") == True:
+                self.label.setText("O's Won!")
+                for i in self.btn:
+                    self.btn[i].setEnabled(False)           
 
-    def x_btn(self,btn):
-        xo = "X"
-        match btn:
-            case 1:
-                self.pushButton.setText("X")
-                self.pushButton.setDisabled(True)
-                
-                if self.check(xo) == False:
-                    self.label.setText("Computer's Turn...")
-                    time.sleep(1)
-                    self.count = self.count + 1
-                    self.opponent(self.count)
-                else:
-                    self.label.setText("X's Won!")
-                    #disable all buttons except retry#
-            case 2:
-                self.pushButton_2.setText("X")
-                self.pushButton_2.setDisabled(True)
-                if self.check(xo) == False:
-                    self.label.setText("Computer's Turn...")
-                    time.sleep(1)
-                    self.count = self.count + 1
-                    self.opponent(self.count)
-                else:
-                    self.label.setText("X's Won!")
-                    #disable all buttons except retry#
-            case 3:
-                self.pushButton_3.setText("X")
-                self.pushButton_3.setDisabled(True)
-                if self.check(xo) == False:
-                    self.label.setText("Computer's Turn...")
-                    time.sleep(1)
-                    self.count = self.count + 1
-                    self.opponent(self.count)
-                else:
-                    self.label.setText("X's Won!")
-                    #disable all buttons except retry#
-            case 4:
-                self.pushButton_4.setText("X")
-                self.pushButton_4.setDisabled(True)
-                if self.check(xo) == False:
-                    self.label.setText("Computer's Turn...")
-                    time.sleep(1)
-                    self.count = self.count + 1
-                    self.opponent(self.count)
-                else:
-                    self.label.setText("X's Won!")
-                    #disable all buttons except retry#
-            case 5:
-                self.pushButton_5.setText("X")
-                self.pushButton_5.setDisabled(True)
-                if self.check(xo) == False:
-                    self.label.setText("Computer's Turn...")
-                    time.sleep(1)
-                    self.count = self.count + 1
-                    self.opponent(self.count)
-                else:
-                    self.label.setText("X's Won!")
-                    #disable all buttons except retry#
-            case 6:
-                self.pushButton_6.setText("X")
-                self.pushButton_6.setDisabled(True)
-                if self.check(xo) == False:
-                    self.label.setText("Computer's Turn...")
-                    time.sleep(1)
-                    self.count = self.count + 1
-                    self.opponent(self.count)
-                else:
-                    self.label.setText("X's Won!")
-                    #disable all buttons except retry#
-            case 7:
-                self.pushButton_7.setText("X")
-                self.pushButton_7.setDisabled(True)
-                if self.check(xo) == False:
-                    self.label.setText("Computer's Turn...")
-                    time.sleep(1)
-                    self.count = self.count + 1
-                    self.opponent(self.count)
-                else:
-                    self.label.setText("X's Won!")
-                    #disable all buttons except retry#
-            case 8:
-                self.pushButton_8.setText("X")
-                self.pushButton_8.setDisabled(True)
-                if self.check(xo) == False:
-                    self.label.setText("Computer's Turn...")
-                    time.sleep(1)
-                    self.count = self.count + 1
-                    self.opponent(self.count)
-                else:
-                    self.label.setText("X's Won!")
-                    #disable all buttons except retry#
-            case 9:
-                self.pushButton_9.setText("X")
-                self.pushButton_9.setDisabled(True)
-                if self.check(xo) == False:
-                    self.label.setText("Computer's Turn...")
-                    time.sleep(1)
-                    self.count = self.count + 1
-                    self.opponent(self.count)
-                else:
-                    self.label.setText("X's Won!")
-                    #disable all buttons except retry#
-
+    def x_btn(self,i):
+        xo = "O"
+        
+        if self.check(xo) == False:
+            self.btn[i].setText("X")
+            self.btn[i].setEnabled(False)
+            self.label.setText("....")
+            self.count = self.count + 1
+            self.opponent(self.count)
+        else:
+            self.label.setText("O's Won!")
+            for i in self.btn:
+                self.btn[i].setEnabled(False)
 
     def retry_btn(self):
-        self.pushButton.setText("")
-        self.pushButton.setDisabled(False)
-
-        self.pushButton_2.setText("")
-        self.pushButton_2.setDisabled(False)
-
-        self.pushButton_3.setText("")
-        self.pushButton_3.setDisabled(False)
-
-        self.pushButton_4.setText("")
-        self.pushButton_4.setDisabled(False)
-
-        self.pushButton_5.setText("")
-        self.pushButton_5.setDisabled(False)
-
-        self.pushButton_6.setText("")
-        self.pushButton_6.setDisabled(False)
-
-        self.pushButton_7.setText("")
-        self.pushButton_7.setDisabled(False)
-
-        self.pushButton_8.setText("")
-        self.pushButton_8.setDisabled(False)
-
-        self.pushButton_9.setText("")
-        self.pushButton_9.setDisabled(False)
-
-        count = 0
+        for i in self.btn:
+            self.btn[i].setText("")
+            self.btn[i].setEnabled(True)
+    
+        self.label.setText("X's Turn")
+        self.count = 0
 
     def setupUi(self, MainWindow):
         self.count = 0
-
+        
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
@@ -293,6 +200,11 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+
+        self.btn = {
+            1: self.pushButton, 2:self.pushButton_2, 3:self.pushButton_3, 
+            4: self.pushButton_4, 5:self.pushButton_5, 6:self.pushButton_6, 
+            7: self.pushButton_7, 8:self.pushButton_8, 9:self.pushButton_9}
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
