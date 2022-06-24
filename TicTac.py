@@ -24,26 +24,27 @@ class Ui_MainWindow(object):
                 self.btn[z].setText("O")
                 self.btn[z].setEnabled(False)
             case _:
+                all = 0
                 for a in self.pair:
-                    print(a)
-                    print(self.btn[a[0]].text())
-                    print(self.btn[a[1]].text())
                     if self.btn[a[0]].text() == "X" and self.btn[a[1]].text() == "X":
                         if self.btn[a[2]].isEnabled() == False:
+                            print("spot is disabled")
                             continue
+                            
                         else:
                             self.btn[a[2]].setText("O")
                             self.btn[a[2]].setEnabled(False)
                             break
                     else:
-                        continue
-                    
-
-                #z = int(uniform(1,10))
-                #while self.btn[z].isEnabled() == False:
-                    #z = int(uniform(1,10))
-                #self.btn[z].setText("O")
-                #self.btn[z].setEnabled(False)
+                        print(all)
+                        all = all + 1
+                
+                if all == 23:
+                    z = int(uniform(1,10))
+                    while self.btn[z].isEnabled() == False:
+                        z = int(uniform(1,10))
+                    self.btn[z].setText("O")
+                    self.btn[z].setEnabled(False)
 
 
     def check(self,xo):
