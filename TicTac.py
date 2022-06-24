@@ -25,8 +25,25 @@ class Ui_MainWindow(object):
                 self.btn[z].setEnabled(False)
             case _:
                 for a in self.pair:
-                    for b in a:
-                        print(b)
+                    print(a)
+                    print(self.btn[a[0]].text())
+                    print(self.btn[a[1]].text())
+                    if self.btn[a[0]].text() == "X" and self.btn[a[1]].text() == "X":
+                        if self.btn[a[2]].isEnabled() == False:
+                            continue
+                        else:
+                            self.btn[a[2]].setText("O")
+                            self.btn[a[2]].setEnabled(False)
+                            break
+                    else:
+                        continue
+                    
+
+                #z = int(uniform(1,10))
+                #while self.btn[z].isEnabled() == False:
+                    #z = int(uniform(1,10))
+                #self.btn[z].setText("O")
+                #self.btn[z].setEnabled(False)
 
 
     def check(self,xo):
@@ -55,24 +72,18 @@ class Ui_MainWindow(object):
 
     def opponent(self, count):
         xo = "X"
-        print(self.count)
         if count == 9 and self.check("X") == False and self.check("O") == False:
             self.label.setText("Tie!")
+            for i in self.btn:
+                self.btn[i].setEnabled(False)
         elif self.check(xo) == True:
             self.label.setText("X's Won!")
             for i in self.btn:
                 self.btn[i].setEnabled(False)
 
         elif self.check(xo) == False:
-            z = int(uniform(1,10))
-            #While button is disabled, cycle through buttons until you find a button that is enabled#
-            while self.btn[z].isEnabled() == False:
-                z = int(uniform(1,10))
-                #Then Proceed with...
-            self.btn[z].setText("O")
-            self.btn[z].setEnabled(False)
+            self.bestSpot(self.count)
             self.count = self.count +1
-            #self.label.setText("X's Turn...")
             if self.check("O") == True:
                 self.label.setText("O's Won!")
                 for i in self.btn:

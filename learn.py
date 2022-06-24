@@ -11,5 +11,8 @@ pair = {
         }
 
 for a in pair:
+    print("a: "+str(a))
+    print(a[1])
     for b in a:
         print(b)
+        continue
